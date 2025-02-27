@@ -1,0 +1,73 @@
+.App {
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+button {
+  background-color: #61dafb;
+  border: none;
+  padding: 10px 20px;
+  margin: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #21a1cb;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Schedule specific styles */
+.schedule-table th, .schedule-table td {
+  vertical-align: middle;
+}
+
+.schedule-table td .badge {
+  font-size: 0.9rem;
+}
+
+.schedule-table tfoot {
+  font-weight: bold;
+}
+
+/* Progress Bar styles */
+.progress-container {
+  position: relative;
+}
+
+.progress-percentage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.progress-card {
+  transition: all 0.3s ease;
+}
+
+.progress-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
