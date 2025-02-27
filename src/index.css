@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,9 +9,62 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  @apply bg-gray-50;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+/* Remove underlines from all links */
+a {
+  @apply no-underline;
+}
+
+/* Updated form styling with more space for icons */
+.form-input {
+  @apply block w-full rounded-md border-gray-300 shadow-sm 
+  focus:ring-indigo-500 focus:border-indigo-500 text-base px-3 py-3;
+}
+
+.form-input-with-icon {
+  @apply pl-10 pr-3 py-3 w-full border border-gray-300 rounded-md shadow-sm 
+  focus:ring-blue-500 focus:border-blue-500 text-base;
+}
+
+.form-select {
+  @apply block w-full rounded-md border-gray-300 shadow-sm py-3 px-4 
+  focus:ring-indigo-500 focus:border-indigo-500 text-base;
+}
+
+/* Gradient heading styles */
+.gradient-heading {
+  @apply font-bold;
+  background: linear-gradient(to right, #4a6cf7, #0ea5ea);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Gradient card styles */
+.gradient-card {
+  @apply rounded-lg shadow-lg overflow-hidden;
+  background: linear-gradient(135deg, rgba(13,148,136,0.9), rgba(6,95,70,0.9));
+}
+
+/* Dashboard card improvements */
+.dashboard-card {
+  @apply rounded-lg shadow-lg p-6 transition-transform hover:-translate-y-1;
+}
+
+/* Nav link improvement */
+.nav-link {
+  @apply px-3 py-2 text-base font-medium rounded-md transition-colors text-white no-underline;
+}
+
+.nav-link-active {
+  @apply bg-blue-700 text-white;
+}
+
+.nav-link-inactive {
+  @apply text-white hover:bg-blue-700;
 }

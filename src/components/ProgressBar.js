@@ -1,5 +1,4 @@
 import React from 'react';
-import { Card } from 'react-bootstrap';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 
@@ -14,10 +13,10 @@ const ProgressBar = ({ tasks, loading }) => {
 
   // Determine progress bar color based on completion percentage
   const getBarColor = (percent) => {
-    if (percent >= 75) return 'rgba(40, 167, 69, 0.8)'; // Green for good progress
-    if (percent >= 50) return 'rgba(0, 123, 255, 0.8)'; // Blue for moderate progress
-    if (percent >= 25) return 'rgba(255, 193, 7, 0.8)'; // Yellow for some progress
-    return 'rgba(220, 53, 69, 0.8)'; // Red for little progress
+    if (percent >= 75) return 'rgba(16, 185, 129, 0.8)'; // green-500
+    if (percent >= 50) return 'rgba(14, 165, 233, 0.8)'; // sky-500
+    if (percent >= 25) return 'rgba(234, 179, 8, 0.8)';  // yellow-500
+    return 'rgba(239, 68, 68, 0.8)'; // red-500
   };
 
   // Chart data
@@ -28,14 +27,14 @@ const ProgressBar = ({ tasks, loading }) => {
         label: 'Completed',
         data: [percentage],
         backgroundColor: getBarColor(percentage),
-        borderColor: 'rgba(0, 0, 0, 0.1)',
+        borderColor: 'rgba(255, 255, 255, 0.2)',
         borderWidth: 1,
       },
       {
         label: 'Remaining',
         data: [100 - percentage],
-        backgroundColor: 'rgba(200, 200, 200, 0.3)',
-        borderColor: 'rgba(0, 0, 0, 0.1)',
+        backgroundColor: 'rgba(209, 213, 219, 0.3)', // gray-300
+        borderColor: 'rgba(255, 255, 255, 0.2)',
         borderWidth: 1,
       }
     ]
@@ -43,12 +42,15 @@ const ProgressBar = ({ tasks, loading }) => {
 
   // Chart options
   const options = {
-    indexAxis: 'y', // Horizontal bar chart
+    indexAxis: 'y',
     scales: {
       x: {
         stacked: true,
         beginAtZero: true,
         max: 100,
+        grid: {
+          display: false
+        },
         ticks: {
           callback: function(value) {
             return value + '%';
@@ -57,7 +59,7 @@ const ProgressBar = ({ tasks, loading }) => {
       },
       y: {
         stacked: true,
-        display: false // Hide y-axis labels
+        display: false
       }
     },
     plugins: {
@@ -90,30 +92,50 @@ const ProgressBar = ({ tasks, loading }) => {
     return "Time to start working on your tasks! 📝";
   };
 
+  if (loading) {
+    return (
+      <div className="flex flex-col items-center justify-center py-8">
+        <div className="w-12 h-12 rounded-full border-4 border-gray-200 border-t-blue-600 animate-spin"></div>
+        <p className="mt-4 text-gray-500">Loading progress data...</p>
+      </div>
+    );
+  }
+
   return (
-    <Card className="shadow-sm">
-      <Card.Header as="h5">Task Progress</Card.Header>
-      <Card.Body>
-        {loading ? (
-          <div className="text-center py-3">Loading progress data...</div>
-        ) : (
-          <>
-            <div style={{ height: '120px' }} className="mb-3">
-              <Bar data={data} options={options} />
-            </div>
-            <div className="text-center">
-              <h3 className="mb-2">{percentage}% Complete</h3>
-              <p className="mb-0 text-muted">
-                {completedTasks} of {totalTasks} tasks completed
-              </p>
-              <p className="mt-2 fw-bold">
-                {getMotivationalMessage(percentage)}
-              </p>
-            </div>
-          </>
-        )}
-      </Card.Body>
-    </Card>
+    <div className="flex flex-col">
+      {/* Chart */}
+      <div className="h-32 mb-6">
+        <Bar data={data} options={options} />
+      </div>
+      
+      {/* Progress indicator and message */}
+      <div className="flex flex-col items-center">
+        <div className="mb-4">
+          <div className={`
+            inline-flex items-center justify-center h-16 w-16 rounded-full text-lg font-bold
+            ${percentage >= 75 ? 'bg-green-100 text-green-800' : 
+              percentage >= 50 ? 'bg-sky-100 text-sky-800' : 
+              percentage >= 25 ? 'bg-yellow-100 text-yellow-800' : 
+              'bg-red-100 text-red-800'}
+          `}>
+            {percentage}%
+          </div>
+        </div>
+        
+        <div className="text-center">
+          <p className="text-sm text-gray-600 mb-1">
+            {completedTasks} of {totalTasks} tasks completed
+          </p>
+          <p className={`text-base font-medium 
+            ${percentage === 100 ? 'text-green-600' : 
+             percentage >= 50 ? 'text-blue-600' : 
+             percentage > 0 ? 'text-yellow-600' : 
+             'text-gray-600'}`}>
+            {getMotivationalMessage(percentage)}
+          </p>
+        </div>
+      </div>
+    </div>
   );
 };
 
