@@ -1,0 +1,20 @@
+/* General styles */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Schedule specific styles */
+.schedule-table th, 
+.schedule-table td {
+  vertical-align: middle;
+}
+
+.schedule-table td .badge {
+  font-size: 0.9rem;
+}
+
+.schedule-table tfoot {
+  font-weight: bold;
+}
